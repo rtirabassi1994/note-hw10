@@ -2,12 +2,9 @@
 
 const router = require("express").Router();
 const store = require("../db/db.json");
-// const store = require("..db/store");
+const store = require("..db/store");
 //require in the fs
-const fs = require('fs');
-//require in uuid *google uuid*
-// var uuid = require('uuid');
-// 
+// const fs = require('fs');
 
 
 router.get("api/notes", (req, res) => {
