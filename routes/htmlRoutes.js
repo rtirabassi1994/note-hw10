@@ -7,7 +7,8 @@ router.get("/notes", (req, res) => {
 })
 
 router.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
     // this is the default route where you will render index.html
-})
+});
 
 module.exports = router;
