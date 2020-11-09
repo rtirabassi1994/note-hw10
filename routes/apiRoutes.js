@@ -26,8 +26,8 @@ router.get("api/notes", (req, res) => {
 router.post("api/notes", (req, res) => {
     store
         .addNote(req.body)
-        .then(note) => res.json(note))
-        .catch(err => res.status(500)).json(err));
+        .then((note) => res.json(note))
+        .catch(err => res.status(500).json(err));
     // this is the POST route where your will you 
     // will utilize the addNotes() function
 
@@ -48,6 +48,8 @@ router.post("api/notes", (req, res) => {
 router.delete("api/notes/:id", (req, res) => {
     store
     .removeNote(req.params.id)
+    .then(() => res.json({ ok: true }))
+    .catch(err => res.status(500).json(err));
     // this is the delete route where you will
     // utilize the removeNote() function
 
@@ -59,6 +61,6 @@ router.delete("api/notes/:id", (req, res) => {
         //write file
 
     //respond with store as a json
-})
+});
 
 module.exports = router;
