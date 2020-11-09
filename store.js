@@ -21,15 +21,20 @@ class Store {
         // here you will write a function that uses the above read function and parses the notes from the file 
       let parsedNotes;
 
+      try {
+        parsedNotes = [].concat(JSON.parse(notes));
+      } catch (err) {
+        parsedNotes = [];
+      }
       // If notes isn't an array or can't be turned into one, send back a new empty array
-     
 
       return parsedNotes;
-    })
+    });
     
   }
 
   addNote(note) {
+    const { title, text } = note;
     // set up variables with our notes data here
 
 
@@ -39,14 +44,22 @@ class Store {
     }
 
     // Add a unique id to the note using uuid package
+    const newNote = { title, text, id: ++this.lastId};
 
     // Get all notes, add the new note, write all the updated notes, return the newNote
+    return this.getNotes()
+      .then(notes => [...notes,newNote])
+      .then(updateNotes => this.write(updatedNotes))
+      .then(() => newNote);
   
   }
 
   removeNote(id) {
     // Get all notes, remove the note with the given id, write the filtered notes
-  }
+    return this.getNotes()
+    .then(notes => notes.filter(note => note.id !== parseInt(id)))
+    .then(filteredNotes => this.write(filteredNotes));
+    }
 }
 
 module.exports = new Store();
