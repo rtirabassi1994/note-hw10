@@ -7,22 +7,15 @@ const store = require("../db/store");
 // const fs = require('fs');
 
 
-router.get("api/notes", (req, res) => {
+router.get("/notes", (req, res) => {
     store
         .getNotes()
         .then(notes => res.json(notes))
         .catch(err => res.status(500).json(err));
-    // this is the GET route where your will you 
-    // will utilize the getNMotes() function
-
-    //read your file/db with fs
-
-    //respond with store as a json
-    res.json(tableData);
 
 });
 
-router.post("api/notes", (req, res) => {
+router.post("/notes", (req, res) => {
     store
         .addNote(req.body)
         .then((note) => res.json(note))
@@ -44,7 +37,7 @@ router.post("api/notes", (req, res) => {
 
 });
 
-router.delete("api/notes/:id", (req, res) => {
+router.delete("/notes/:id", (req, res) => {
     store
     .removeNote(req.params.id)
     .then(() => res.json({ ok: true }))
